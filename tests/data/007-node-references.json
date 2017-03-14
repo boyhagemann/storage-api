@@ -1,0 +1,160 @@
+{
+    "components": [
+        {
+            "properties": {
+                "__id": "Base",
+                "type": null
+            },
+            "fields": [
+                {
+                    "__id": "field-1",
+                    "name": "my-children",
+                    "collection": true,
+                    "component": "Base"
+                }
+            ]
+        },
+        {
+            "properties": {
+                "__id": "Context",
+                "type": null
+            },
+            "fields": [
+                {
+                    "__id": "context-params",
+                    "name": "params",
+                    "collection": true,
+                    "component": "Context",
+                    "order": 0
+                },
+                {
+                    "__id": "context-children",
+                    "name": "children",
+                    "collection": true,
+                    "component": "Context",
+                    "order": 1
+                }
+            ]
+        },
+        {
+            "properties": {
+                "__id": "my-project-component",
+                "type": null
+            },
+            "nodes": [
+                {
+                    "__id": "root",
+                    "type": "Base",
+                    "purpose": "entity"
+                },
+                {
+                    "__id": "child-1",
+                    "type": "Base",
+                    "purpose": "entity"
+                },
+                {
+                    "__id": "child-2",
+                    "type": "Base",
+                    "purpose": "entity"
+                },
+                {
+                    "__id": "child-3",
+                    "type": "Context",
+                    "purpose": "entity"
+                }
+            ],
+            "edges": [
+                {
+                    "__id": "edge-1",
+                    "from": "root",
+                    "to": "child-1",
+                    "thru": "field-1"
+                },
+                {
+                    "__id": "edge-2",
+                    "from": "root",
+                    "to": "child-2",
+                    "thru": "field-1"
+                },
+                {
+                    "__id": "edge-3",
+                    "from": "root",
+                    "to": "child-3",
+                    "thru": "field-1"
+                },
+                {
+                    "__id": "edge-4",
+                    "from": "child-3",
+                    "to": "some-node-1",
+                    "thru": "context-children"
+                }
+            ]
+        },
+        {
+            "properties": {
+                "__id": "SomeComponentWithNodes",
+                "type": null
+            },
+            "nodes": [
+                {
+                    "__id": "some-node-1",
+                    "type": "Base"
+                },
+                {
+                    "__id": "some-node-2",
+                    "type": "Base"
+                }
+            ],
+            "edges": [
+                {
+                    "__id": "some-edge-1",
+                    "from": "some-node-1",
+                    "to": "some-node-2",
+                    "thru": "field-1"
+                }
+            ]
+        }
+    ],
+    "nodeId": "root",
+    "expected": [
+        {
+            "_id": "root",
+            "_type": "Base",
+            "my-children": [
+                "child-1",
+                "child-2",
+                "child-3"
+            ]
+        },
+        {
+            "_id": "child-1",
+            "_type": "Base",
+            "my-children": []
+        },
+        {
+            "_id": "child-2",
+            "_type": "Base",
+            "my-children": []
+        },
+        {
+            "_id": "child-3",
+            "_type": "Context",
+            "params": [],
+            "children": [
+                "some-node-1"
+            ]
+        },
+        {
+            "_id": "some-node-1",
+            "_type": "Base",
+            "my-children": [
+                "some-node-2"
+            ]
+        },
+        {
+            "_id": "some-node-2",
+            "_type": "Base",
+            "my-children": []
+        }
+    ]
+}
