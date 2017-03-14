@@ -1,7 +1,7 @@
 <?php
 
-use Boyhagemann\Storage\Drivers\MysqlEntity;
-use Boyhagemann\Storage\Drivers\MysqlRecord;
+use Illuminate\Support\Collection;
+use Helpers\DataBuilder;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,15 +59,20 @@ $app->get('/resource/{resource}/build/{record}/{node}', function ($resource, $re
     $entity = $entities->get($resource);
     $component = $records->get($entity, $record);
 
+    // Find the dependencies
     $dependencies = $component['uses']
         ? $records->find($entity, [
             ['_id', 'IN', $component['uses']],
         ])
         : [];
 
+    // Merge the component and its dependencies together
     $components = array_merge([$component], $dependencies);
 
-    $data = \Illuminate\Support\Collection::make($components)->map(function(Array $component) { return $component['data']; });
+    // We are only interested in the 'data' property of the stored component
+    $data = Collection::make($components)
+        ->map(function(Array $component) { return $component['data']; })
+        ->toArray();
 
-    return \Helpers\DataBuilder::build($data, $node);
+    return DataBuilder::build($data, $node);
 });

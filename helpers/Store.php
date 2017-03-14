@@ -108,14 +108,12 @@ class Store extends \ArrayObject
     public static function makeCollection(Array $components, $property)
     {
         return Collection::make($components)
-//            ->map(function(Array $component) {
-//                return $component['data'];
-//            })
             ->filter(function(Array $data) use ($property) {
                 return isset($data[$property]);
             })
             ->flatMap(function(Array $data) use ($property) {
                 return $data[$property];
-            });
+            })
+            ->unique('__id');
     }
 }

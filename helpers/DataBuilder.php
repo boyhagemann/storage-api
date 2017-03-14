@@ -22,7 +22,9 @@ class DataBuilder
             static::buildNode($stack->pop(), $stack, $data, $store);
         }
 
-        return $data;
+        return $data
+//            ->unique('_id')
+            ->values();
     }
 
     /**
@@ -42,13 +44,10 @@ class DataBuilder
         ];
 
         $fields = $store
-            ->find('fields', [
-                'component' => $node['type'],
-            ])->sortBy('order');
+            ->find('fields', ['component' => $node['type']])
+            ->sortBy('order');
 
-        $edges = $store->find('edges', [
-            'from' => $nodeId,
-        ]);
+        $edges = $store->find('edges', ['from' => $nodeId]);
 
         foreach($fields as $field) {
 
@@ -76,17 +75,19 @@ class DataBuilder
                 return $edge['thru'] === $field['__id'];
             })
 
-            // We don't want decorator nodes here...
-            ->filter(function(Array $edge) use ($store) {
-                return $store->first('nodes', [
-                    '__id' => $edge['to'],
-                    'purpose' => 'entity',
-                ]);
-            })
+
+//            // We don't want property nodes here, only entities and decorators
+//            ->filter(function(Array $edge) use ($store) {
+//                return $store->first('nodes', [
+//                    '__id' => $edge['to'],
+//                ]);
+//            })
 
             // Add the node to the stack to be processed
             ->map(function(Array $edge) use ($stack) {
 
+                // Add this node to the stack to be processed.
+                // Add it to the beginning of the stack to keep the correct order.
                 $stack->unshift($edge['to']);
 
                 return $edge['to'];

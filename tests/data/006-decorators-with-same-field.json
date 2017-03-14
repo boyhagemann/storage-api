@@ -1,0 +1,125 @@
+{
+    "components": [
+        {
+            "properties": {
+                "__id": "Base",
+                "type": null
+            },
+            "fields": [
+                {
+                    "__id": "field-1",
+                    "name": "my-children",
+                    "collection": true,
+                    "component": "Base"
+                }
+            ]
+        },
+        {
+            "properties": {
+                "__id": "DecoratorComponent",
+                "type": null
+            },
+            "fields": [
+                {
+                    "__id": "decorator-1",
+                    "name": "my-decorating-field",
+                    "collection": true,
+                    "component": "DecoratorComponent"
+                }
+            ]
+        },
+        {
+            "properties": {
+                "__id": "my-project-component",
+                "type": null
+            },
+            "nodes": [
+                {
+                    "__id": "root",
+                    "type": "DecoratorComponent",
+                    "purpose": "entity"
+                },
+                {
+                    "__id": "my-decorator",
+                    "type": "DecoratorComponent",
+                    "purpose": "decorator"
+                },
+                {
+                    "__id": "child-1",
+                    "type": "Base",
+                    "purpose": "entity"
+                },
+                {
+                    "__id": "decorator-as-normal-node-1",
+                    "type": "DecoratorComponent",
+                    "purpose": "entity"
+                },
+                {
+                    "__id": "decorator-as-normal-node-2",
+                    "type": "DecoratorComponent",
+                    "purpose": "entity"
+                }
+            ],
+            "edges": [
+                {
+                    "__id": "edge-1",
+                    "from": "root",
+                    "to": "my-decorator",
+                    "thru": "decorator-1"
+                },
+                {
+                    "__id": "edge-2",
+                    "from": "my-decorator",
+                    "to": "child-1",
+                    "thru": "decorator-1"
+                },
+                {
+                    "__id": "edge-3",
+                    "from": "root",
+                    "to": "decorator-as-normal-node-1",
+                    "thru": "decorator-1"
+                },
+                {
+                    "__id": "edge-4",
+                    "from": "my-decorator",
+                    "to": "decorator-as-normal-node-2",
+                    "thru": "decorator-1"
+                }
+            ]
+        }
+    ],
+    "nodeId": "root",
+    "expected": [
+        {
+            "_id": "root",
+            "_type": "DecoratorComponent",
+            "my-decorating-field": [
+                "my-decorator",
+                "decorator-as-normal-node-1"
+            ]
+        },
+        {
+            "_id": "my-decorator",
+            "_type": "DecoratorComponent",
+            "my-decorating-field": [
+                "child-1",
+                "decorator-as-normal-node-2"
+            ]
+        },
+        {
+            "_id": "decorator-as-normal-node-1",
+            "_type": "DecoratorComponent",
+            "my-decorating-field": []
+        },
+        {
+            "_id": "child-1",
+            "_type": "Base",
+            "my-children": []
+        },
+        {
+            "_id": "decorator-as-normal-node-2",
+            "_type": "DecoratorComponent",
+            "my-decorating-field": []
+        }
+    ]
+}
