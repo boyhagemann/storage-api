@@ -1,0 +1,53 @@
+{
+    "components": [
+        {
+            "properties": {
+                "__id": "Base",
+                "type": null
+            },
+            "fields": [
+                {
+                    "__id": "field-1",
+                    "name": "my-prop",
+                    "collection": false,
+                    "component": "Base"
+                }
+            ]
+        },
+        {
+            "properties": {
+                "__id": "my-project-component",
+                "type": null
+            },
+            "nodes": [
+                {
+                    "__id": "root",
+                    "type": "Base",
+                    "purpose": "entity"
+                },
+                {
+                    "__id": "prop-1",
+                    "type": "Base",
+                    "purpose": "property",
+                    "value": "my-value"
+                }
+            ],
+            "edges": [
+                {
+                    "__id": "edge-1",
+                    "from": "root",
+                    "to": "prop-1",
+                    "thru": "field-1"
+                }
+            ]
+        }
+    ],
+    "nodeId": "root",
+    "expected": [
+        {
+            "_id": "root",
+            "_type": "Base",
+            "my-prop": "my-value"
+        }
+    ]
+}

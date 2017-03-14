@@ -1,0 +1,76 @@
+{
+    "components": [
+        {
+            "properties": {
+                "__id": "Base",
+                "type": null
+            },
+            "fields": [
+                {
+                    "__id": "field-1",
+                    "name": "my-children",
+                    "collection": true,
+                    "component": "Base"
+                }
+            ]
+        },
+        {
+            "properties": {
+                "__id": "my-project-component",
+                "type": null
+            },
+            "nodes": [
+                {
+                    "__id": "root",
+                    "type": "Base",
+                    "purpose": "entity"
+                },
+                {
+                    "__id": "child-1",
+                    "type": "Base",
+                    "purpose": "entity"
+                },
+                {
+                    "__id": "child-2",
+                    "type": "Base",
+                    "purpose": "entity"
+                }
+            ],
+            "edges": [
+                {
+                    "__id": "edge-1",
+                    "from": "root",
+                    "to": "child-1",
+                    "thru": "field-1"
+                },
+                {
+                    "__id": "edge-2",
+                    "from": "root",
+                    "to": "child-2",
+                    "thru": "field-1"
+                }
+            ]
+        }
+    ],
+    "nodeId": "root",
+    "expected": [
+        {
+            "_id": "root",
+            "_type": "Base",
+            "my-children": [
+                "child-1",
+                "child-2"
+            ]
+        },
+        {
+            "_id": "child-1",
+            "_type": "Base",
+            "my-children": []
+        },
+        {
+            "_id": "child-2",
+            "_type": "Base",
+            "my-children": []
+        }
+    ]
+}

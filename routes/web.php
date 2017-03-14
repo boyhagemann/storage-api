@@ -53,3 +53,21 @@ $app->get('/resource/{resource}/data/{record}', function ($resource, $record) us
     $entity = $entities->get($resource);
     return $records->get($entity, $record);
 });
+
+$app->get('/resource/{resource}/build/{record}/{node}', function ($resource, $record, $node) use ($app, $entities, $records) {
+
+    $entity = $entities->get($resource);
+    $component = $records->get($entity, $record);
+
+    $dependencies = $component['uses']
+        ? $records->find($entity, [
+            ['_id', 'IN', $component['uses']],
+        ])
+        : [];
+
+    $components = array_merge([$component], $dependencies);
+
+    $data = \Illuminate\Support\Collection::make($components)->map(function(Array $component) { return $component['data']; });
+
+    return \Helpers\DataBuilder::build($data, $node);
+});

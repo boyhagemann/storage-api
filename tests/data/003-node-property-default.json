@@ -1,0 +1,40 @@
+{
+    "components": [
+        {
+            "properties": {
+                "__id": "Base",
+                "type": null
+            },
+            "fields": [
+                {
+                    "__id": "field-1",
+                    "name": "my-prop",
+                    "collection": false,
+                    "component": "Base",
+                    "default": "my-default"
+                }
+            ]
+        },
+        {
+            "properties": {
+                "__id": "my-project-component",
+                "type": null
+            },
+            "nodes": [
+                {
+                    "__id": "root",
+                    "type": "Base",
+                    "purpose": "entity"
+                }
+            ]
+        }
+    ],
+    "nodeId": "root",
+    "expected": [
+        {
+            "_id": "root",
+            "_type": "Base",
+            "my-prop": "my-default"
+        }
+    ]
+}

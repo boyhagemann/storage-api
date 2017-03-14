@@ -1,0 +1,29 @@
+{
+    "components": [
+        {
+            "properties": {
+                "__id": "Base",
+                "type": null
+            }
+        },
+        {
+            "properties": {
+                "__id": "my-project-component",
+                "type": null
+            },
+            "nodes": [
+                {
+                    "__id": "test",
+                    "type": "Base"
+                }
+            ]
+        }
+    ],
+    "nodeId": "test",
+    "expected": [
+        {
+            "_id": "test",
+            "_type": "Base"
+        }
+    ]
+}
