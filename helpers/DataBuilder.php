@@ -13,6 +13,10 @@ class DataBuilder
     public static function build(Array $components, $nodeId)
     {
         $store = Store::fromComponents($components);
+
+        // Do some event like things to alter the store items
+        static::transform($store);
+
         $stack = new SplStack();
         $data = new Collection();
 
@@ -22,9 +26,7 @@ class DataBuilder
             static::buildNode($stack->pop(), $stack, $data, $store);
         }
 
-        return $data
-//            ->unique('_id')
-            ->values();
+        return $data->values();
     }
 
     /**
@@ -40,7 +42,7 @@ class DataBuilder
 
         $item = [
             '_id' => $nodeId,
-            '_type' => $component['type'] ?: $component['__id']
+            '_type' => $component['type'] ?: $component['__id'],
         ];
 
         $fields = $store
@@ -57,6 +59,40 @@ class DataBuilder
         }
 
         $data->push($item);
+    }
+
+    public static function transform(Store $store)
+    {
+        // Find the decorators
+        $store
+            ->find('nodes', ['purpose' => 'decorator'])
+            ->each(function(Array $decorator) use ($store) {
+                static::transformDecorator($decorator, $store);
+            });
+
+    }
+
+    public static function transformDecorator(Array $decoratorNode, Store $store)
+    {
+        $decoratorEdge = $store
+            ->firstOrFail('edges', ['to' => $decoratorNode['__id']]);
+
+        $store->update('nodes', $decoratorNode['__id'], [
+            'purpose' => 'entity',
+        ]);
+
+        $store
+            ->find('edges', ['from' => $decoratorEdge['from']])
+            ->filter(function(Array $edge) use ($decoratorEdge) {
+                return $edge['__id'] !== $decoratorEdge['__id'];
+            })
+            ->each(function(Array $edge) use ($decoratorNode, $store) {
+//                var_dump($edge);
+                $store->update('edges', $edge['__id'], [
+                    'from' => $decoratorNode['__id'],
+                    'thru' => $decoratorNode['field'],
+                ]);
+            });
     }
 
     /**

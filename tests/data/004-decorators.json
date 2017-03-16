@@ -42,7 +42,8 @@
                 {
                     "__id": "my-decorator",
                     "type": "DecoratorComponent",
-                    "purpose": "decorator"
+                    "purpose": "decorator",
+                    "field": "decorator-1"
                 },
                 {
                     "__id": "child-1",
@@ -59,9 +60,9 @@
                 },
                 {
                     "__id": "edge-2",
-                    "from": "my-decorator",
+                    "from": "root",
                     "to": "child-1",
-                    "thru": "decorator-1"
+                    "thru": "field-1"
                 }
             ]
         }

@@ -81,6 +81,22 @@ class Store extends \ArrayObject
     }
 
     /**
+     * @param $path
+     * @param $id
+     * @param array $item
+     * @return $this
+     */
+    public function update($path, $id, Array $item)
+    {
+        $current = $this->get($path)->offsetGet($id);
+        $merged = array_merge($current, $item);
+
+        $this->get($path)->offsetSet($id, $merged);
+
+        return $this;
+    }
+
+    /**
      * @param array $components
      * @return Store
      */
@@ -114,6 +130,7 @@ class Store extends \ArrayObject
             ->flatMap(function(Array $data) use ($property) {
                 return $data[$property];
             })
-            ->unique('__id');
+            ->unique('__id')
+            ->keyBy('__id');
     }
 }
