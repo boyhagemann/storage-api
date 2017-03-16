@@ -2,7 +2,10 @@
 
 namespace App\Exceptions;
 
+use Boyhagemann\Storage\Exceptions\RecordNotChanged;
+use Boyhagemann\Storage\Exceptions\RecordNotFound;
 use Exception;
+use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -45,6 +48,14 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
+        if ($e instanceof RecordNotChanged) {
+            return response('No Changes', Response::HTTP_NOT_MODIFIED);
+        }
+
+        if ($e instanceof RecordNotFound) {
+            return response('Record not found', Response::HTTP_NOT_FOUND);
+        }
+
         return parent::render($request, $e);
     }
 }

@@ -13,12 +13,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/boyhagemann/storage.git",
-                "reference": "3fee9fef92643fcc86c37d8da3d49188c9ee9670"
+                "reference": "29e4ebfa3f6687ecc0e6b40593747a3d4c5d0724"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/boyhagemann/storage/zipball/3fee9fef92643fcc86c37d8da3d49188c9ee9670",
-                "reference": "3fee9fef92643fcc86c37d8da3d49188c9ee9670",
+                "url": "https://api.github.com/repos/boyhagemann/storage/zipball/29e4ebfa3f6687ecc0e6b40593747a3d4c5d0724",
+                "reference": "29e4ebfa3f6687ecc0e6b40593747a3d4c5d0724",
                 "shasum": ""
             },
             "require": {
@@ -42,7 +42,7 @@
                     "email": "boy.hagemann@komparu.com"
                 }
             ],
-            "time": "2017-03-10 15:09:38"
+            "time": "2017-03-16 10:59:42"
         },
         {
             "name": "doctrine/inflector",

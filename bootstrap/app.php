@@ -56,10 +56,10 @@ $app->singleton('pdo', function() {
 
     return $pdo;
 });
-$app->singleton('entities', function() use ($app) {
+$app->singleton(\Boyhagemann\Storage\Contracts\EntityRepository::class, function() use ($app) {
     return new \Boyhagemann\Storage\Drivers\MysqlEntity($app->make('pdo'));
 });
-$app->singleton('records', function() use ($app) {
+$app->singleton(\Boyhagemann\Storage\Contracts\Record::class, function() use ($app) {
     return new \Boyhagemann\Storage\Drivers\MysqlRecord($app->make('pdo'));
 });
 
