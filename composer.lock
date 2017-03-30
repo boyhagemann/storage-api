@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7528fbce208c5379d5928537636988b4",
-    "content-hash": "62068705b285643ac5d8fcb1726cfdf9",
+    "hash": "8195e886f21cf2dc1c41fed343e34891",
+    "content-hash": "75e78eb6362200ff6667095cf859785d",
     "packages": [
         {
             "name": "boyhagemann/storage",
@@ -13,12 +13,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/boyhagemann/storage.git",
-                "reference": "29e4ebfa3f6687ecc0e6b40593747a3d4c5d0724"
+                "reference": "2d8bfe4a3972e96681b585885f98ad439d34b590"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/boyhagemann/storage/zipball/29e4ebfa3f6687ecc0e6b40593747a3d4c5d0724",
-                "reference": "29e4ebfa3f6687ecc0e6b40593747a3d4c5d0724",
+                "url": "https://api.github.com/repos/boyhagemann/storage/zipball/2d8bfe4a3972e96681b585885f98ad439d34b590",
+                "reference": "2d8bfe4a3972e96681b585885f98ad439d34b590",
                 "shasum": ""
             },
             "require": {
@@ -42,7 +42,7 @@
                     "email": "boy.hagemann@komparu.com"
                 }
             ],
-            "time": "2017-03-16 10:59:42"
+            "time": "2017-03-23 16:11:26"
         },
         {
             "name": "doctrine/inflector",
@@ -1524,6 +1524,48 @@
                 "routing"
             ],
             "time": "2017-01-19 11:35:12"
+        },
+        {
+            "name": "palanik/lumen-cors",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/palanik/lumen-cors.git",
+                "reference": "39ecb83bf4bea8553a6a406f8ab6355fd0983a24"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/palanik/lumen-cors/zipball/39ecb83bf4bea8553a6a406f8ab6355fd0983a24",
+                "reference": "39ecb83bf4bea8553a6a406f8ab6355fd0983a24",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "palanik\\lumen\\Middleware\\": "."
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "palanik"
+                }
+            ],
+            "description": "Cross-origin resource sharing (CORS) middleware for Lumen micro-framework.",
+            "homepage": "https://github.com/palanik/lumen-cors",
+            "keywords": [
+                "cors",
+                "corslumen",
+                "cross-origin",
+                "laravel",
+                "lumen",
+                "lumencors",
+                "preflight"
+            ],
+            "time": "2016-06-07 15:28:08"
         },
         {
             "name": "paragonie/random_compat",
@@ -3809,7 +3851,8 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "boyhagemann/storage": 20
+        "boyhagemann/storage": 20,
+        "palanik/lumen-cors": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

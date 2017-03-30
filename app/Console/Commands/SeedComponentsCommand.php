@@ -1,5 +1,6 @@
 <?php namespace App\Console\Commands;
 
+use Boyhagemann\Storage\Contracts\Entity;
 use Helpers\ComponentHelper;
 use Boyhagemann\Storage\Contracts\EntityRepository;
 use Boyhagemann\Storage\Contracts\Record;
@@ -40,10 +41,10 @@ class SeedComponentsCommand extends Command {
         $pdo = App::make('pdo');
 
         /** @var Record $records */
-        $records = App::make('records');
+        $records = App::make(Record::class);
 
         /** @var EntityRepository $entities */
-        $entities = App::make('entities');
+        $entities = App::make(EntityRepository::class);
 
         // Reset the state of the database
         $path = storage_path('app/seed.sql');
