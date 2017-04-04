@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use Boyhagemann\Storage\Exceptions\Invalid;
 use Boyhagemann\Storage\Exceptions\RecordNotChanged;
 use Boyhagemann\Storage\Exceptions\RecordNotFound;
 use Exception;
@@ -54,6 +55,10 @@ class Handler extends ExceptionHandler
 
         if ($e instanceof RecordNotFound) {
             return response('Record not found', Response::HTTP_NOT_FOUND);
+        }
+
+        if ($e instanceof Invalid) {
+            return response($e->getMessages(), Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
         return parent::render($request, $e);

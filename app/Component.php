@@ -1,7 +1,8 @@
 <?php namespace App;
 
 use Boyhagemann\Storage\Contracts\EntityRepository;
-use Boyhagemann\Storage\Contracts\Record;
+use Boyhagemann\Storage\Contracts\Entity;
+use Boyhagemann\Storage\Contracts\RecordRepository;
 
 /**
  * Class Component
@@ -24,20 +25,20 @@ class Component
     protected $entity;
 
     /**
-     * @var Record
+     * @var RecordRepository
      */
-    protected $store;
+    protected $records;
 
     /**
      * ComponentController constructor.
      *
-     * @param EntityRepository $entityRepository
-     * @param Record $store
+     * @param EntityRepository $entities
+     * @param RecordRepository $records
      */
-    public function __construct(EntityRepository $entityRepository, Record $store)
+    public function __construct(EntityRepository $entities, RecordRepository $records)
     {
-        $this->entity = $entityRepository->get('component');
-        $this->store = $store;
+        $this->entity = $entities->get('component');
+        $this->records = $records;
     }
 
     /**
@@ -49,6 +50,6 @@ class Component
     {
         array_unshift($arguments, $this->entity);
 
-        return call_user_func_array([$this->store, $name], $arguments);
+        return call_user_func_array([$this->records, $name], $arguments);
     }
 }

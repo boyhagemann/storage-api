@@ -1,9 +1,8 @@
 <?php namespace App\Console\Commands;
 
-use Boyhagemann\Storage\Contracts\Entity;
+use Boyhagemann\Storage\Contracts\RecordRepository;
 use Helpers\ComponentHelper;
 use Boyhagemann\Storage\Contracts\EntityRepository;
-use Boyhagemann\Storage\Contracts\Record;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\App;
@@ -40,8 +39,8 @@ class SeedComponentsCommand extends Command {
         /** @var \PDO $pdo */
         $pdo = App::make('pdo');
 
-        /** @var Record $records */
-        $records = App::make(Record::class);
+        /** @var RecordRepository $records */
+        $records = App::make(RecordRepository::class);
 
         /** @var EntityRepository $entities */
         $entities = App::make(EntityRepository::class);
@@ -78,8 +77,8 @@ class SeedComponentsCommand extends Command {
                         '_id' => $properties['__id'],
                         'name' => $properties['__id'],
                         'label' => $properties['label'],
-                        'data' => json_encode($component),
-                        'uses' => json_encode($uses),
+                        'data' => $component,
+                        'uses' => $uses,
                     ]);
                 }
                 catch(\Exception $e) {

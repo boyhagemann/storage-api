@@ -26,7 +26,7 @@ $app->get('/', function () use ($app) {
  */
 $app->get('component', 'ComponentController@index');
 $app->get('component/{component}', 'ComponentController@show');
-$app->post('component', 'ComponentController@store');
+$app->post('component/{component}', 'ComponentController@store');
 $app->put('component/{component}', 'ComponentController@store');
 $app->delete('component/{component}', 'ComponentController@store');
 
@@ -35,7 +35,7 @@ $app->delete('component/{component}', 'ComponentController@store');
  */
 $app->get('component/{component}/node', 'NodeController@index');
 $app->get('component/{component}/node/{node}', 'NodeController@show');
-$app->post('component/{component}/node', 'NodeController@store');
+$app->post('component/{component}/node/{node}', 'NodeController@store');
 $app->put('component/{component}/node/{node}', 'NodeController@update');
 $app->delete('component/{component}/node/{node}', 'NodeController@destroy');
 $app->get('component/{component}/node/{node}/build', 'NodeController@build');

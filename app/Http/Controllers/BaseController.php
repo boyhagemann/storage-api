@@ -15,7 +15,7 @@ class BaseController extends Controller
     /**
      * @var Component
      */
-    protected $repository;
+    protected $components;
 
     /**
      * ComponentController constructor.
@@ -24,7 +24,7 @@ class BaseController extends Controller
      */
     public function __construct(Component $repository)
     {
-        $this->repository = $repository;
+        $this->components = $repository;
     }
 
 }

@@ -2,6 +2,7 @@
 
 use Boyhagemann\Storage\Contracts\Entity;
 use Boyhagemann\Storage\Contracts\Record;
+use Boyhagemann\Storage\Contracts\RecordRepository;
 use Illuminate\Support\Collection;
 
 class ComponentHelper
@@ -9,10 +10,10 @@ class ComponentHelper
     /**
      * @param array $component
      * @param Entity $entity
-     * @param Record $records
+     * @param RecordRepository $records
      * @return array
      */
-    public static function getDependencies(Array $component, Entity $entity, Record $records)
+    public static function getDependencies(Array $component, Entity $entity, RecordRepository $records)
     {
         // Get the components in use in this component
         $uses = static::scanForDependencies($component);

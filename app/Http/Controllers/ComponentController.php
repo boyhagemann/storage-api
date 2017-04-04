@@ -2,12 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\Component;
 use Helpers\QueryHelper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 
-class ComponentController extends BaseController
+class ComponentController extends Controller
 {
+    /**
+     * @var Component
+     */
+    protected $components;
+
+    /**
+     * ComponentController constructor.
+     *
+     * @param Component $repository
+     */
+    public function __construct(Component $model)
+    {
+        $this->components = $model;
+    }
+
     /**
      * @return array
      */
@@ -59,7 +75,7 @@ class ComponentController extends BaseController
 //        dd(compact('and', 'or'));
 
 
-        return $this->repository->find(compact('and', 'or'));
+        return $this->components->find(compact('and', 'or'));
     }
 
     /**
@@ -68,21 +84,14 @@ class ComponentController extends BaseController
      */
     public function show($component)
     {
-        return $this->repository->get($component);
+        return $this->components->get($component);
     }
 
     /**
      * @param Request $request
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        $this->validate($request, [
-            '_id' => 'required|string',
-        ]);
-
-        $id = $request->get('_id');
-        $payload = $request->except(['_id']);
-
-        $this->repository->upsert($id, $payload);
+        return $this->components->upsert($id, $request->all());
     }
 }

@@ -56,11 +56,25 @@ $app->singleton('pdo', function() {
 
     return $pdo;
 });
-$app->singleton(\Boyhagemann\Storage\Contracts\EntityRepository::class, function() use ($app) {
-    return new \Boyhagemann\Storage\Drivers\MysqlEntity($app->make('pdo'));
+$app->singleton(\Boyhagemann\Storage\Contracts\FieldRepository::class, function() use ($app) {
+    return new \Boyhagemann\Storage\Drivers\MysqlField(
+        $app->make('pdo'),
+        new \Boyhagemann\Storage\Validators\FieldValidator());
 });
-$app->singleton(\Boyhagemann\Storage\Contracts\Record::class, function() use ($app) {
-    return new \Boyhagemann\Storage\Drivers\MysqlRecord($app->make('pdo'));
+$app->singleton(\Boyhagemann\Storage\Contracts\EntityRepository::class, function() use ($app) {
+    return new \Boyhagemann\Storage\Drivers\MysqlEntity(
+        $app->make('pdo'),
+        new \Boyhagemann\Storage\Validators\EntityValidator(),
+        $app->make(\Boyhagemann\Storage\Contracts\FieldRepository::class));
+});
+$app->singleton(\Boyhagemann\Storage\Contracts\RecordRepository::class, function() use ($app) {
+    $record = new \Boyhagemann\Storage\Drivers\MysqlRecord($app->make('pdo'));
+
+    $record->buildValidator(function(\Boyhagemann\Storage\Contracts\Entity $entity) {
+        return new \Boyhagemann\Storage\Validators\RecordValidator($entity);
+    });
+
+    return $record;
 });
 
 /*
