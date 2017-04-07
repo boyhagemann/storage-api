@@ -6,7 +6,7 @@ class QueryHelper
 {
     /**
      * @param array $filters
-     * @return Collection
+     * @return array
      */
     public static function transform(Array $filters)
     {

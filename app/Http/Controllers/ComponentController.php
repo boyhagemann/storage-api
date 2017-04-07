@@ -75,7 +75,7 @@ class ComponentController extends Controller
 //        dd(compact('and', 'or'));
 
 
-        return $this->components->find(compact('and', 'or'));
+        return $this->components->find(compact('and', 'or'))->toArray();
     }
 
     /**

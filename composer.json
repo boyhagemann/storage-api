@@ -10,7 +10,7 @@
         "vlucas/phpdotenv": "~2.2",
         "boyhagemann/storage": "dev-master",
         "mmghv/lumen-route-binding": "^1.0",
-        "palanik/lumen-cors": "dev-master"
+        "palanik/lumen-cors": "^0.0.2"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

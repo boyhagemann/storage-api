@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8195e886f21cf2dc1c41fed343e34891",
-    "content-hash": "75e78eb6362200ff6667095cf859785d",
+    "hash": "c067bfffd6c170037ff0901d042f967a",
+    "content-hash": "94069dc9ab461dd4402a3dd523f84096",
     "packages": [
         {
             "name": "boyhagemann/storage",
@@ -1529,7 +1529,7 @@
         },
         {
             "name": "palanik/lumen-cors",
-            "version": "dev-master",
+            "version": "v0.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/palanik/lumen-cors.git",
@@ -3915,8 +3915,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "boyhagemann/storage": 20,
-        "palanik/lumen-cors": 20
+        "boyhagemann/storage": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
